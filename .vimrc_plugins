@@ -1,3 +1,17 @@
 call plug#begin('~/.vim/bundle')
 Plug 'scrooloose/nerdtree'
+Plug 'junegunn/seoul256.vim'
+Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
+Plug 'universal-ctags/ctags'
+Plug 'itchyny/lightline.vim'
+Plug 'amiorin/vim-project'
+Plug 'mhinz/vim-startify'
+Plug 'StanAngeloff/php.vim'
+Plug 'stephpy/vim-php-cs-fixer'
+Plug 'ncm2/ncm2'
+Plug 'phpactor/phpactor'
+Plug  'phpactor/ncm2-phpactor'
+Plug 'tpope/vim-fugitive'
+Plug 'mhinz/vim-signify'
 call plug#end()

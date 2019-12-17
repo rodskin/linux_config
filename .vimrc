@@ -1,13 +1,47 @@
-""" MY modifications
+" VIM-plug
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
+" PLUGINS
+source ~/linux_config/.vimrc_plugins
+silent! colo seoul256
 
+" ----------------------------------------------------------------------------
+" goyo.vim + limelight.vim
+" ----------------------------------------------------------------------------
+let g:limelight_paragraph_span = 1
+let g:limelight_priority = -1
 
+function! s:goyo_enter()
+  if has('gui_running')
+    set fullscreen
+    set background=light
+    set linespace=7
+  elseif exists('$TMUX')
+    silent !tmux set status off
+  endif
+  Limelight
+  let &l:statusline = '%M'
+  hi StatusLine ctermfg=red guifg=red cterm=NONE gui=NONE
+endfunction
 
+function! s:goyo_leave()
+  if has('gui_running')
+    set nofullscreen
+    set background=dark
+    set linespace=0
+  elseif exists('$TMUX')
+    silent !tmux set status on
+  endif
+  Limelight!
+endfunction
 
+autocmd! User GoyoEnter nested call <SID>goyo_enter()
+autocmd! User GoyoLeave nested call <SID>goyo_leave()
+
+nnoremap <Leader>G :Goyo<CR>
 
 set enc=utf-8
 set expandtab sw=4 ts=4
@@ -50,7 +84,3 @@ command! -range -nargs=0 -bar IndentHTML <line1>,<line2>!tidy -q -f /dev/null -o
 " nerdTree
 " Ctrl + N pour Toggle NerdTree
 map <C-n> :NERDTreeToggle<CR>
-
-
-" PLUGINS
-source .vimrc_plugins
